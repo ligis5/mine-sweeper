@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.main {
+  min-width: 700px;
+  height: 95vh;
+}
+.page {
+  background-color: darkslateblue;
+  display: grid;
+  width: auto;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.score-board {
+  display: flex;
+  width: auto;
+  justify-content: center;
+  padding-left: 70px;
+  margin: auto;
+}
+.score {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 160px;
+}
+#user {
+  text-align: end;
+}
+#new-game {
+  width: 70px;
+  color: aliceblue;
+  background-color: rgb(165, 24, 24);
+}
+.board {
+  display: grid;
+  width: max-content;
+  height: max-content;
+  padding: 10px;
+  grid-template-columns: repeat(30, 20px);
+  grid-template-rows: repeat(16, 20px);
+  border: 1px solid black;
+}
+.piece {
+  border: 1px solid black;
+}
+.explosion {
+  margin: auto;
+  /* display: none; */
+  background-color: red;
+}
