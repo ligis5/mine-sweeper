@@ -44,29 +44,49 @@ const clickedBomb = (pieces, shuffled) => {
 };
 
 const openUntillBomb = (row, column) => {
-  const PieceLocation = document.querySelectorAll(
-    `[row = '${row}'][column = '${column}']`
-  );
-  if (!PieceLocation[0]) {
-    return;
-  }
+  let upColumn = column + 1;
+  let downColumn = column - 1;
+  let upRow = row + 1;
+  let downRow = row - 1;
 
-  if (PieceLocation[0].getAttribute("bombsaround")) {
-    return;
-  } else {
-    // add pieces that touches bombs, then this should work.
-    PieceLocation[0].style.backgroundColor = "green";
-    openUntillBomb((row = Number(row) + 1), column);
-    openUntillBomb(row, (column = Number(column) + 1));
-  }
+  let pieces = document.querySelectorAll(`
+     [row = '${row}'][column = '${upColumn}'],
+     [row = '${row}'][column = '${downColumn}'],
+     [row = '${downRow}'][column = '${column}'],
+     [row = '${upRow}'][column = '${column}'],
+      [row = '${downRow}'][column = '${downColumn}'],
+      [row = '${downRow}'][column = '${upColumn}'],
+      [row = '${upRow}'][column = '${upColumn}'],
+      [row = '${upRow}'][column = '${downColumn}']`);
+
+  pieces.forEach((p) => {
+    if (!p || p.getAttribute("class") === "open" || p.getAttribute("bomb")) {
+      return;
+    }
+    if (p.getAttribute("bombsaround")) {
+      p.innerHTML = p.getAttribute("bombsaround");
+      p.setAttribute("class", "open");
+      return;
+    }
+
+    p.setAttribute("class", "open");
+    let newRow = p.getAttribute("row");
+    let newCol = p.getAttribute("column");
+    openUntillBomb(Number(newRow), Number(newCol));
+  });
 };
 
 const clickedCorrect = (correctId, pieces) => {
   if (!explosion) {
     let row = pieces[correctId].getAttribute("row");
     let column = pieces[correctId].getAttribute("column");
-    pieces[correctId].style.backgroundColor = "green";
-    openUntillBomb(row, column);
+    pieces[correctId].setAttribute("class", "open");
+    if (pieces[correctId].getAttribute("bombsaround")) {
+      pieces[correctId].innerHTML =
+        pieces[correctId].getAttribute("bombsaround");
+      return;
+    }
+    openUntillBomb(Number(row), Number(column));
   } else return;
 };
 
