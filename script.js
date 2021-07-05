@@ -14,7 +14,7 @@ const createPieces = () => {
   board.setAttribute("class", "board");
   board.setAttribute("id", "board");
   page.appendChild(board);
-  for (i = 1; i < amountOfPieces + 1; i++) {
+  for (i = 0; i < amountOfPieces; i++) {
     pieceDiv.setAttribute("id", i);
     board.appendChild(pieceDiv.cloneNode(true));
   }
@@ -30,17 +30,25 @@ img.setAttribute("class", "explosion");
 img.src = "./explosion.png";
 
 let explosion = false;
+let gameStart = false;
+
 // if clicked on any bomb, all bombs will show up.
-const clickedBomb = (pieces, shuffled) => {
-  if (!explosion) {
-    for (o = 0; o < shuffled.length / 5 - 1; o++) {
-      let bombId = shuffled[o];
-      if (pieces[bombId]) {
-        pieces[bombId].children[0].style.display = "inline";
-        explosion = true;
-      }
+const clickedBomb = (piece, bombsIds, pieces) => {
+  bombsIds.forEach((id) => {
+    let piece = document.getElementById("explosion" + id);
+    if (piece && gameStart) {
+      piece.style.display = "inline";
+      explosion = true;
     }
-  } else return;
+  });
+
+  if (!gameStart) {
+    piece.removeAttribute("bomb");
+    const deleteFirstBomb = document.getElementById("explosion" + piece.id);
+    deleteFirstBomb.remove();
+    console.log(piece);
+    clickedCorrect(piece.id, pieces);
+  }
 };
 
 const openUntillBomb = (row, column) => {
@@ -77,6 +85,7 @@ const openUntillBomb = (row, column) => {
 };
 
 const clickedCorrect = (correctId, pieces) => {
+  gameStart = true;
   if (!explosion) {
     let row = pieces[correctId].getAttribute("row");
     let column = pieces[correctId].getAttribute("column");
@@ -157,7 +166,8 @@ const shuffleAndAddBombs = () => {
   };
 
   const placeBombs = () => {
-    for (o = 0; o < shuffled.length / 5 - 1; o++) {
+    let bombs = [];
+    for (o = -1; o < shuffled.length / 5; o++) {
       let bombId = shuffled[o];
       if (pieces[bombId]) {
         const PiecePostionRow = Math.ceil(pieces[bombId].id / columns);
@@ -169,8 +179,9 @@ const shuffleAndAddBombs = () => {
         pieces[bombId].setAttribute("bomb", true);
         img.setAttribute("id", "explosion" + bombId);
         pieces[bombId].appendChild(img.cloneNode(true));
+        bombs.push(bombId);
         pieces[bombId].addEventListener("click", () =>
-          clickedBomb(pieces, shuffled)
+          clickedBomb(pieces[bombId], bombs, pieces)
         );
       }
     }
@@ -191,4 +202,5 @@ newGame.addEventListener("click", () => {
   deleteOldGame();
   createPieces();
   shuffleAndAddBombs();
+  gameStart = false;
 });
