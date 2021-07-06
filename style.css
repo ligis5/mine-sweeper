@@ -1,4 +1,5 @@
 * {
+  background-color: darkslateblue;
   margin: 0;
   padding: 0;
 }
@@ -7,35 +8,21 @@
   height: 95vh;
 }
 .page {
-  background-color: darkslateblue;
   display: grid;
   width: auto;
   height: 90vh;
   justify-content: center;
   align-items: center;
 }
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-.score-board {
-  display: flex;
-  width: auto;
-  justify-content: center;
-  padding-left: 70px;
-  margin: auto;
-}
-.score {
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 160px;
-}
-#user {
-  text-align: end;
-}
 #new-game {
+  position: fixed;
+  right: 2px;
+  top: 2px;
   width: 70px;
   color: aliceblue;
+  background-color: rgb(165, 24, 24);
+}
+h2 {
   background-color: rgb(165, 24, 24);
 }
 .board {
@@ -53,9 +40,10 @@
 .open {
   border: 1px solid black;
   background-color: green;
+  color: aliceblue;
 }
 .explosion {
   margin: auto;
-  /* display: none; */
+  display: none;
   background-color: red;
 }
