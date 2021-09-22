@@ -1,0 +1,27 @@
+{
+  "name": "mine-sweeper",
+  "version": "1.0.0",
+  "description": "You can use the [editor on GitHub](https://github.com/ligis5/mine-sweeper/edit/main/README.md) to maintain and preview the content for your website in Markdown files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ligis5/mine-sweeper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ligis5/mine-sweeper/issues"
+  },
+  "homepage": "https://github.com/ligis5/mine-sweeper#readme",
+  "devDependencies": {
+    "css-loader": "^6.3.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.53.0",
+    "webpack-cli": "^4.8.0"
+  }
+}
