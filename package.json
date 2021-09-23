@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/ligis5/mine-sweeper/issues"
   },
-  "homepage": "https://github.com/ligis5/mine-sweeper#readme",
+  "homepage": "https://github.com/ligis5/mine-sweeper",
   "devDependencies": {
     "css-loader": "^6.3.0",
     "style-loader": "^3.3.0",
